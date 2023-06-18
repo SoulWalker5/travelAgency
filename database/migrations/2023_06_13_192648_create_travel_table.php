@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('travel', function (Blueprint $table) {
-            $table->uuid();
+        Schema::create('travels', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('description')->nullable();
             $table->tinyInteger('numberOfDays');
-            $table->tinyInteger('numberOfNights');
             $table->boolean('isPublic');
             $table->timestamps();
         });
