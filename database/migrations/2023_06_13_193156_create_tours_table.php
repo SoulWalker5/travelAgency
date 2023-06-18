@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->dateTime('startingDate');
             $table->dateTime('endingDate');
+            $table->unsignedInteger('price');
             $table->timestamps();
         });
     }
