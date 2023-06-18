@@ -17,11 +17,9 @@ class TravelFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->word(),
-            'slug' => fake()->unique()->word(),
+            'name' => 'My awesome travel',
             'description' => fake()->sentence(),
-            'numberOfDays' => $number = fake()->numberBetween(1, 20),
-            'numberOfNights' => $number - 1,
+            'numberOfDays' => fake()->numberBetween(1, 20),
             'isPublic' => fake()->boolean(),
         ];
     }
