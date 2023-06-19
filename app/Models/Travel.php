@@ -31,7 +31,7 @@ class Travel extends Model
     public function numberOfNights(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, $attributes) => $attributes['numberOfNights'] - 1,
+            get: fn ($value, $attributes) => $attributes['numberOfDays'] - 1,
         );
     }
 
