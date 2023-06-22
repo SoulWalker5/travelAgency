@@ -36,6 +36,11 @@ class Travel extends Model
         );
     }
 
+    public function isPublic(): bool
+    {
+        return $this->isPublic == true;
+    }
+
     public function scopePublic(Builder $query): Builder
     {
         return $query->where('isPublic', true);
