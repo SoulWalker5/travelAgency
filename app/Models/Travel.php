@@ -21,11 +21,12 @@ class Travel extends Model
         'description',
         'numberOfDays',
         'isPublic',
+        'travel_id',
     ];
 
     public function tours(): HasMany
     {
-        return $this->hasMany(Travel::class);
+        return $this->hasMany(Tour::class);
     }
 
     public function numberOfNights(): Attribute
