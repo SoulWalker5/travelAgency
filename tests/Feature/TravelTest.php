@@ -2,22 +2,22 @@
 
 namespace Tests\Feature;
 
- use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Travel;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class TravelTest extends TestCase
 {
     use RefreshDatabase;
 
     public function test_travel_list_returns_paginated_data_correctly(): void
     {
-        Travel::factory(6)->create(['isPublic' => true]);
+        Travel::factory(config('pagination.frontend.travel.index') + 1)->create(['isPublic' => true]);
 
         $response = $this->get('/api/travels');
 
         $response->assertStatus(200);
-        $response->assertJsonCount(5, 'data');
+        $response->assertJsonCount(config('pagination.frontend.travel.index'), 'data');
         $response->assertJsonPath('meta.last_page', 2);
     }
 
