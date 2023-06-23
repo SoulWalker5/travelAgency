@@ -21,11 +21,12 @@ class Travel extends Model
         'description',
         'numberOfDays',
         'isPublic',
+        'travel_id',
     ];
 
     public function tours(): HasMany
     {
-        return $this->hasMany(Travel::class);
+        return $this->hasMany(Tour::class);
     }
 
     public function numberOfNights(): Attribute
@@ -33,6 +34,11 @@ class Travel extends Model
         return Attribute::make(
             get: fn ($value, $attributes) => $attributes['numberOfDays'] - 1,
         );
+    }
+
+    public function isPublic(): bool
+    {
+        return $this->isPublic == true;
     }
 
     public function scopePublic(Builder $query): Builder

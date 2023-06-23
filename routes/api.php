@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\TravelToursController;
 use App\Http\Controllers\Frontend\TravelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,4 +22,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([], function () {
    Route::resource('travels', TravelController::class)->only(['index']);
+
+   Route::resource('travels/{travelSlug}/tours', TravelToursController::class)->only(['index']);
 });

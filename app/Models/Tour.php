@@ -12,6 +12,10 @@ class Tour extends Model
 {
     use HasFactory, HasUuids;
 
+    public const SORTABLE_FIELDS = [
+        'price',
+    ];
+
     protected $fillable = [
         'travelId',
         'name',

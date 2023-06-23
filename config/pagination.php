@@ -5,5 +5,8 @@ return [
         'travel' => [
             'index' => 5,
         ],
+        'tour' => [
+            'index' => 5,
+        ],
     ],
 ];
