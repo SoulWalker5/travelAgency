@@ -12,6 +12,6 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::factory()->createMany([['name' => Role::ADMIN], ['name' => Role::USER]]);
+        Role::factory()->createMany([['name' => Role::ADMIN], ['name' => Role::EDITOR]]);
     }
 }
