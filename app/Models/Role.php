@@ -10,8 +10,13 @@ class Role extends Model
 {
     use HasFactory, HasUuids;
 
-    public const USER = 'User';
     public const ADMIN = 'Admin';
+    public const EDITOR = 'Editor';
+
+    public static array $roles = [
+        self::ADMIN,
+        self::EDITOR,
+    ];
 
     protected $fillable = ['name'];
 }

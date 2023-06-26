@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             if ($user->name === 'Admin') {
                 $role = Role::where('name', Role::ADMIN)->first()->id;
             } else {
-                $role = Role::where('name', Role::USER)->first()->id;
+                $role = Role::where('name', Role::EDITOR)->first()->id;
             }
 
             $user->roles()->attach([$role]);
