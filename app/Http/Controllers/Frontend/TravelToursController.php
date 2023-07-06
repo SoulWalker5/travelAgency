@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TravelToursIndexRequest;
+use App\Http\Requests\Frontend\TravelToursIndexRequest;
 use App\Http\Resources\TourResource;
 use App\Http\Services\TourService;
 use App\Models\Travel;
