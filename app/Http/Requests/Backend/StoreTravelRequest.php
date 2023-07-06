@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Backend;
 
-use App\Models\Tour;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TravelToursIndexRequest extends FormRequest
+class StoreTravelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +22,10 @@ class TravelToursIndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sorting' => ['sometimes', 'in:asc,desc'],
-            'sortingField' => ['sometimes', 'in:' . implode(Tour::SORTABLE_FIELDS)],
-            'priceFrom' => ['sometimes', 'numeric', 'gt:0'],
-            'priceTo' => ['sometimes', 'numeric', 'gt:0'],
-            'dateFrom' => ['sometimes', 'date'],
-            'dateTo' => ['sometimes', 'date'],
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['string', 'max:255'],
+            'numberOfDays' => ['required', 'int'],
+            'isPublic' => ['boolean'],
         ];
     }
 }
