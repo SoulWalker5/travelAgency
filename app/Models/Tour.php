@@ -17,7 +17,7 @@ class Tour extends Model
     ];
 
     protected $fillable = [
-        'travelId',
+        'travel_id',
         'name',
         'startingDate',
         'endingDate',
@@ -29,9 +29,9 @@ class Tour extends Model
         'endingDate' => 'datetime',
     ];
 
-    public function travels(): BelongsTo
+    public function travel(): BelongsTo
     {
-        return $this->belongsTo(Tour::class);
+        return $this->belongsTo(Travel::class);
     }
 
     public function price(): Attribute

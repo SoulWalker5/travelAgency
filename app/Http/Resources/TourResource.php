@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Frontend\TravelResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,6 +24,7 @@ class TourResource extends JsonResource
             'startingDate' => $this->startingDate->toDateTimeString(),
             'endingDate' => $this->endingDate->toDateTimeString(),
             'price' => number_format($this->price, 2),
+            'travel' => $this->whenLoaded('travel', new TravelResource($this->travel))
         ];
     }
 }

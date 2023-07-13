@@ -22,6 +22,7 @@ Route::prefix('admin')
     ->middleware(['auth:sanctum', 'role:admin'])
     ->group(function () {
         Route::resource('travels', Admin\TravelController::class)->only(['store']);
+        Route::resource('tours', Admin\TourController::class)->only(['store']);
     });
 
 Route::group([], function () {
