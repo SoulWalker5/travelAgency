@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Travel;
 
 use App\Models\Role;
+use App\Models\Travel;
 use App\Models\User;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class AdminCreateTravelTest extends TestCase
+class AdminTravelTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -59,5 +59,26 @@ class AdminCreateTravelTest extends TestCase
 
         $response->assertStatus(201);
         $response->assertJsonPath('data.name', 'Travel name');
+    }
+
+    public function test_editor_can_update_travel()
+    {
+        $this->seed(RoleSeeder::class);
+        $user = User::factory()->create();
+        $user->roles()->attach(Role::where('name', Role::EDITOR)->value('id'));
+        $travel = Travel::factory()->create(['isPublic' => false]);
+
+        $model = [
+            'name' => 'Another travel name',
+            'description' => 'Another travel description',
+            'isPublic' => true,
+            'numberOfDays' => 5,
+        ];
+
+        $response = $this->actingAs($user)->putJson("/api/admin/travels/$travel->id", $model);
+
+        $response->assertStatus(200);
+        unset($model['isPublic']);
+        $response->assertJson(['data' => $model]);
     }
 }
