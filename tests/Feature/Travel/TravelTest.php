@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Travel;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Travel;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class TravelTest extends TestCase

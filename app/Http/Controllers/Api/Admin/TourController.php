@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\StoreTourRequest;
+use App\Http\Requests\Admin\StoreTourRequest;
 use App\Http\Resources\TourResource;
 use App\Models\Travel;
 

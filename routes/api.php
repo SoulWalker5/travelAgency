@@ -19,10 +19,16 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', LoginController::class)->name('login');
 
 Route::prefix('admin')
-    ->middleware(['auth:sanctum', 'role:admin'])
+    ->middleware(['auth:sanctum'])
     ->group(function () {
-        Route::resource('travels', Admin\TravelController::class)->only(['store']);
-        Route::resource('travels/{travel}/tours', Admin\TourController::class)->only(['store']);
+        Route::middleware('role:admin')
+            ->group(function () {
+                Route::post('travels', [Admin\TravelController::class, 'store'])->name('travel.store');
+
+                Route::resource('travels/{travel}/tours', Admin\TourController::class)->only(['store']);
+        });
+
+        Route::put('travels/{travel}', [Admin\TravelController::class, 'update'])->name('travel.update');
     });
 
 Route::group([], function () {
