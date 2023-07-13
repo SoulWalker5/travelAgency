@@ -1,9 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\LoginController;
-use App\Http\Controllers\Backend\TravelController as BackendTravelController;
-use App\Http\Controllers\Frontend\TravelToursController;
-use App\Http\Controllers\Frontend\TravelController;
+use App\Http\Controllers\Api\Admin;
+use App\Http\Controllers\Api\Frontend;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,11 +21,12 @@ Route::post('/login', LoginController::class)->name('login');
 Route::prefix('admin')
     ->middleware(['auth:sanctum', 'role:admin'])
     ->group(function () {
-        Route::resource('travels', BackendTravelController::class)->only(['store']);
+        Route::resource('travels', Admin\TravelController::class)->only(['store']);
+        Route::resource('travels/{travel}/tours', Admin\TourController::class)->only(['store']);
     });
 
 Route::group([], function () {
-    Route::resource('travels', TravelController::class)->only(['index']);
+    Route::resource('travels', Frontend\TravelController::class)->only(['index']);
 
-    Route::resource('travels/{travelSlug}/tours', TravelToursController::class)->only(['index']);
+    Route::resource('travels/{travelSlug}/tours', Frontend\TravelToursController::class)->only(['index']);
 });
