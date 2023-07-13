@@ -16,7 +16,8 @@ class AdminCreateTourTest extends TestCase
 
     public function test_return_error_without_authentication()
     {
-        $response = $this->postJson("/api/admin/tours");
+        $travel = Travel::factory()->create();
+        $response = $this->postJson("/api/admin/travels/$travel->id/tours");
 
         $response->assertStatus(401);
     }
@@ -26,8 +27,9 @@ class AdminCreateTourTest extends TestCase
         $this->seed(RoleSeeder::class);
         $user = User::factory()->create();
         $user->roles()->attach(Role::where('name', Role::EDITOR)->value('id'));
+        $travel = Travel::factory()->create();
 
-        $response = $this->actingAs($user)->postJson("/api/admin/tours");
+        $response = $this->actingAs($user)->postJson("/api/admin/travels/$travel->id/tours");
 
         $response->assertStatus(403);
     }
@@ -37,8 +39,9 @@ class AdminCreateTourTest extends TestCase
         $this->seed(RoleSeeder::class);
         $user = User::factory()->create();
         $user->roles()->attach(Role::where('name', Role::ADMIN)->value('id'));
+        $travel = Travel::factory()->create();
 
-        $response = $this->actingAs($user)->postJson("/api/admin/tours", [
+        $response = $this->actingAs($user)->postJson("/api/admin/travels/$travel->id/tours", [
             'price' => 10.99,
         ]);
 
@@ -50,10 +53,9 @@ class AdminCreateTourTest extends TestCase
         $this->seed(RoleSeeder::class);
         $user = User::factory()->create();
         $user->roles()->attach(Role::where('name', Role::ADMIN)->first()->id);
-        $travel = Travel::factory()->create(['isPublic' => true]);
+        $travel = Travel::factory()->create();
 
-        $response = $this->actingAs($user)->postJson("/api/admin/tours", [
-            'travelId' => $travel->id,
+        $response = $this->actingAs($user)->postJson("/api/admin/travels/$travel->id/tours", [
             'name' => 'My awesome tour',
             'startingDate' => now()->addDay()->toDateTimeString(),
             'endingDate' => now()->addDays(2)->toDateTimeString(),

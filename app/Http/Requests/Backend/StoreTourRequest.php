@@ -22,10 +22,6 @@ class StoreTourRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'travelId' => [
-                'required',
-                'exists:travels,id',
-            ],
             'name' => [
                 'required',
                 'string',

@@ -24,7 +24,6 @@ class TourResource extends JsonResource
             'startingDate' => $this->startingDate->toDateTimeString(),
             'endingDate' => $this->endingDate->toDateTimeString(),
             'price' => number_format($this->price, 2),
-            'travel' => $this->whenLoaded('travel', new TravelResource($this->travel))
         ];
     }
 }
